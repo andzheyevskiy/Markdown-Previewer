@@ -1,0 +1,130 @@
+///// MEDIA BREAKPOINTS////
+  $sm:576px;
+  $md:768px;
+  $lg:992px;
+  $xl:1200px;
+  $xxl:1400px;
+
+
+///// COMMON USE MIXINS /////
+@mixin media($breakpoint) {
+    @media screen and (min-width: $breakpoint) {
+        @content;
+    }
+}
+
+@mixin box-sizing($value){
+    -webkit-box-sizing: $value;
+    -moz-box-sizing: $value;
+    box-sizing: $value;
+}
+
+  @mixin box-shadow($value){
+    -webkit-box-shadow: $value;
+    -moz-box-shadow: $value;
+    box-shadow: $value;
+}
+
+  @mixin border-radius($value){
+    -moz-border-radius: $value;
+    -webkit--radius: $value;
+    border-radius: $value;
+}
+
+  @mixin background-size($value){
+    -o-background-size: $value;
+    -webkit-background-size: $value;
+    -moz-background-size: $value;
+    background-size: $value;
+}
+///// PERSONAL MIXINS ///////
+@mixin size($h,$w){
+  height: $h;
+  width: $w;
+}
+///// CSS /////
+*{
+  @include box-sizing(border-box)
+}
+body{
+  @include size(100vh,95vw);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(74, 0, 114);
+}
+h1{
+  margin-top: 50px;
+  margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: bold;
+  color: white;
+  @include media($md){
+    font-size: 30px ;
+   }
+}
+.main-box{
+@include size(95%,95%);
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+@include media($md){
+ flex-direction: row;   
+}
+margin-bottom: 20px;
+}
+.editor-wrapper, .preview-wrapper{
+  @include size(48%,95%);
+  @include media($md){
+    @include size(95%,49.5% ); 
+   }
+}
+.pi{
+  height: 25px;
+  background-color: rgb(0, 217, 255);
+  border: 5px double rgb(0, 21, 255);
+  border-bottom: none;
+  margin: 0;
+  @include media($md){
+    font-size: 20px;   
+    height: 30px;
+   }
+}
+#editor{
+  @include size(91%,100%);
+  border: 5px double rgb(0, 21, 255);
+  border-top: none;
+  resize: none;
+  overflow: scroll;
+  @include media($md){
+    resize: vertical;
+  }
+}
+#editor:focus, #editor:active{
+  overflow: auto;
+  outline: none;
+  @include box-shadow(none);
+  border: 5px double rgb(0, 21, 255);
+  border-top: none;
+}
+#preview{
+  @include size(91%,100% );
+  min-height: 50%;
+  background-color: white;
+  border: 5px double rgb(0, 21, 255);
+  border-top: none;
+  margin: 0;
+  overflow: scroll;
+  resize: vertical;
+}
+#preview *{
+  color: black;
+  background-color: white;
+  background: none;
+  margin: 0;
+} 
+#preview * img{
+  max-width: 90%;
+}
